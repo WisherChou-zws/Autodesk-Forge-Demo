@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1, user-scalable=no"/>
+    <title>BimAngle.com</title>
+	<link rel="stylesheet" type="text/css" href="../lib/style.min.css">
+	<script src="../lib/viewer3D.min.js"></script>
+</head>
+<body style="margin:0px">
+	<div id="viewer-local"></div>
+<script>
+    //ENABLE_DEBUG = false;
+
+    var config = {
+        extensions: [
+            "Autodesk.Viewing.ZoomWindow"
+        ],
+        disabledExtensions: {
+            measure: false,
+            section: false,
+        }
+    };
+
+    var path = "./3d.svf";
+    var element = document.getElementById('viewer-local');
+    var viewer = new Autodesk.Viewing.Private.GuiViewer3D(element, config);
+    //var viewer = new Autodesk.Viewing.Viewer3D(element, config);
+
+    var options = {
+        docid: path,
+        env: 'Local',
+        offline: 'true',
+        useADP: false
+    };
+
+    Autodesk.Viewing.Initializer (options, function () {
+        //viewer.initialize();
+        viewer.start();
+        viewer.load(options.docid, undefined, onLoadSuccess, onLoadError);
+    });
+
+    function onLoadSuccess(event) {
+        console.log('success');
+    }
+
+    function onLoadError(event) {
+        console.log('fail');
+    }
+
+</script>
+</body>
+</html>
