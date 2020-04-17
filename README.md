@@ -9,6 +9,31 @@
 
 项目架构Vue-cli@2.0 + vue-router + scss
 
+配置文件
+webpack.base.conf.js
+```
+const webpack = require('webpack')
+module.exports = {
+  externals: {
+    'three': 'THREE',
+    'forge-viewer': 'Autodesk'
+  },
+  plugins: [
+    new webpack.optimize.CommonsChunkPlugin('common'),
+    new webpack.ProvidePlugin({
+      THREE: 'three',
+      Autodesk: 'forge-viewer'
+    })
+  ]
+}
+```
+
+index.html 引入scripe和css
+```
+    <link rel="stylesheet" href="./static/forgeV7/style.min.css">
+    <script src="./static/forgeV7/viewer3D.min.js"></script>
+```
+
 #### 首先安装依赖
 ```
 npm install
